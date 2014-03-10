@@ -15,21 +15,12 @@ namespace TestConsole
         public int AGE { get; set; }
         static void Main(string[] args)
         {
-            string str = "ABC";
-            Console.WriteLine(str.ToTitleUpper());
-            str = null;
 
-            Console.WriteLine(str.ToTitleLower());
-            MyBatis entity = new MyBatis
-            {
-                Package = "nb.cnblogs.lzrabbit.domain",
-                TableName = "GProduct",
-                DbColumns = CodeGenerator.Core.DB.DBHelper.GetgDbColumns("ghotel", "GProduct")
-            };
-            string code = entity.TransformText();
-            Console.WriteLine(code);
-
-            File.WriteAllText("D:/entity.java", code);
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             Console.Read();
 

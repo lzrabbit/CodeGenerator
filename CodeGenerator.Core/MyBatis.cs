@@ -85,7 +85,7 @@ for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
             
             #line default
             #line hidden
-            this.Write(")\r\n\t</update>\r\n</mapper>");
+            this.Write("\r\n\t</update>\r\n</mapper>");
             return this.GenerationEnvironment.ToString();
         }
     }

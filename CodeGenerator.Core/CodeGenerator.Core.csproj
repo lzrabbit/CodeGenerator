@@ -43,12 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\DbColumn.cs" />
-    <Compile Include="DB\DbDataBase.cs" />
-    <Compile Include="DB\DBHelper.cs" />
+    <Compile Include="DB\SqlServerDB.cs" />
+    <Compile Include="DB\MySqlDB.cs" />
     <Compile Include="DB\DbIndex.cs" />
     <Compile Include="DB\DbTable.cs" />
-    <Compile Include="DB\MySqlDbMap.cs" />
-    <Compile Include="DB\SqlServerDbMap.cs" />
+    <Compile Include="DB\IDB.cs" />
     <Compile Include="T4TemplateBase.cs" />
     <Compile Include="POCO.cs">
       <DependentUpon>POCO.tt</DependentUpon>

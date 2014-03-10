@@ -29,24 +29,14 @@ namespace CodeGenerator.Core.DB
         /// <summary>
         /// 数据库类型对应的C#类型
         /// </summary>
-        public string CSharpType
-        {
-            get
-            {
-                return MySqlDbMap.CsharpType(ColumnType);
-            }
-        }
+        public string CSharpType { get; set; }
+        
 
         /// <summary>
         ///
         /// </summary>
-        public string JavaType
-        {
-            get
-            {
-                return MySqlDbMap.JavaType(ColumnType);
-            }
-        }
+        public string JavaType{get;set;}
+       
 
         /// <summary>
         /// 字节长度
@@ -62,7 +52,7 @@ namespace CodeGenerator.Core.DB
         /// <summary>
         /// 整数位
         /// </summary>
-        public int Precision { get; set; }
+        //public int Precision { get; set; }
 
         /// <summary>
         /// 小数位

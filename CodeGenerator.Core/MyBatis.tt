@@ -28,6 +28,7 @@
 		{
 			if(i==0) this.Write(DbColumnsWithoutPrimaryKey[i].ColumnName+"=VALUES("+DbColumnsWithoutPrimaryKey[i].ColumnName+")");
 			else this.Write(","+DbColumnsWithoutPrimaryKey[i].ColumnName+"=VALUES("+DbColumnsWithoutPrimaryKey[i].ColumnName+")");
-		}#>)
+		}#>
+
 	</update>
 </mapper>

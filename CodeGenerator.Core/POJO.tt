@@ -8,13 +8,13 @@ package <#=this.Package #>;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class <#=this.TableName.ToTitleUpper() #> {
+public class <#=this.TableName #> {
 	<#foreach(var column in this.DbColumns){ #>
 
 	/**
 	*<#=column.Remark#>
 	*/
-	private <#=column.JavaType#> <#=column.ColumnName.ToTitleLower()#>;
+	private <#=column.JavaType#> <#=column.ColumnName#>;
 	<#}#>
 
 
@@ -24,14 +24,14 @@ public class <#=this.TableName.ToTitleUpper() #> {
 	*<#=column.Remark#>
 	*/
 	public <#=column.JavaType#> get<#=column.ColumnName.ToTitleUpper()#>(){
-		return this.<#=column.ColumnName.ToTitleLower()#>;
+		return this.<#=column.ColumnName#>;
 	}
 
 	/**
 	*<#=column.Remark#>
 	*/
 	public void set<#=column.ColumnName.ToTitleUpper()#>(<#=column.JavaType#>  value) {
-		this.<#=column.ColumnName.ToTitleLower()#> = value;
+		this.<#=column.ColumnName#> = value;
 	}
 	<#}#>
 

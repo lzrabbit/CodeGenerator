@@ -38,7 +38,7 @@ namespace CodeGenerator.Core
             this.Write(";\r\n\r\nimport java.sql.Date;\r\nimport java.sql.Timestamp;\r\n\r\npublic class ");
             
             #line 11 "D:\GitHub\CodeGenerator\CodeGenerator.Core\POJO.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName.ToTitleUpper()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
             
             #line default
             #line hidden
@@ -66,7 +66,7 @@ foreach(var column in this.DbColumns){
             this.Write(" ");
             
             #line 17 "D:\GitHub\CodeGenerator\CodeGenerator.Core\POJO.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName.ToTitleLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName));
             
             #line default
             #line hidden
@@ -108,7 +108,7 @@ foreach(var column in this.DbColumns){
             this.Write("(){\r\n\t\treturn this.");
             
             #line 27 "D:\GitHub\CodeGenerator\CodeGenerator.Core\POJO.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName.ToTitleLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName));
             
             #line default
             #line hidden
@@ -136,7 +136,7 @@ foreach(var column in this.DbColumns){
             this.Write("  value) {\r\n\t\tthis.");
             
             #line 34 "D:\GitHub\CodeGenerator\CodeGenerator.Core\POJO.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName.ToTitleLower()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(column.ColumnName));
             
             #line default
             #line hidden

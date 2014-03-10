@@ -12,7 +12,7 @@ namespace <#=this.Namespace #>
 		<#foreach(var column in this.DbColumns){ #>
 
 		/// <summary>
-        /// <#=column.Remark#>
+        /// <#=column.Remark.RegexReplace("\r\n","\r\n\t\t/// ")#>
         /// </summary>
 		public <#=column.CSharpType#> <#=column.ColumnName#>{ get; set; }
 		<#}#>

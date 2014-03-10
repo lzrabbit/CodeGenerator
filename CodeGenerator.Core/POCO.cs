@@ -52,7 +52,7 @@ foreach(var column in this.DbColumns){
             this.Write("\r\n\t\t/// <summary>\r\n        /// ");
             
             #line 15 "D:\GitHub\CodeGenerator\CodeGenerator.Core\POCO.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(column.Remark));
+            this.Write(this.ToStringHelper.ToStringWithCulture(column.Remark.RegexReplace("\r\n","\r\n\t\t/// ")));
             
             #line default
             #line hidden
