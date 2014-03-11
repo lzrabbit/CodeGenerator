@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resource\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,7 +54,31 @@
     <Compile Include="AddConnection.Designer.cs">
       <DependentUpon>AddConnection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\MyBatis.cs">
+      <DependentUpon>MyBatis.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\POCO.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\POJO.cs">
+      <DependentUpon>POJO.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\SafeConvert.cs" />
+    <Compile Include="Core\T4Base.cs" />
+    <Compile Include="Core\T4TemplateBase.cs" />
     <Compile Include="DbConnection.cs" />
+    <Compile Include="DB\DbColumn.cs" />
+    <Compile Include="DB\DbIndex.cs" />
+    <Compile Include="DB\DbTable.cs" />
+    <Compile Include="DB\IDB.cs" />
+    <Compile Include="DB\MySqlDB.cs" />
+    <Compile Include="DB\SqlServerDB.cs" />
     <Compile Include="ENodeType.cs" />
     <Compile Include="SimpleCoder.cs">
       <SubType>Form</SubType>
@@ -75,6 +103,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Core\MyBatis.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MyBatis.cs</LastGenOutput>
+    </None>
+    <None Include="Core\POCO.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>POCO.cs</LastGenOutput>
+    </None>
+    <None Include="Core\POJO.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>POJO.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -86,10 +126,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeGenerator.Core\CodeGenerator.Core.csproj">
-      <Project>{f75e9ed4-bdac-4dbf-be0f-03ec70d8c17c}</Project>
-      <Name>CodeGenerator.Core</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Resource\MySql.Data.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 ﻿using CodeGenerator.Core;
-using CodeGenerator.Core.DB;
+using CodeGenerator.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
