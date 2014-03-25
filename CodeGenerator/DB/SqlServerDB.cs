@@ -19,6 +19,10 @@ namespace CodeGenerator.DB
 
 
         #region IDB 成员
+        public EDbType DbType
+        {
+            get { return EDbType.SqlServer; }
+        }
 
         public bool TestConnection()
         {

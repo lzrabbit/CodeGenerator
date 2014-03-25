@@ -106,13 +106,23 @@ namespace CodeGenerator
                     };
                     break;
                 case "MyBatis":
-                    t4 = new MyBatis
-                    {
-                        Package = package,
-                        Namespace = ns,
-                        DbColumns = columns,
-                        TableName = tableName,
-                    };
+                    if (DB.DbType == EDbType.MySql)
+                        t4 = new MyBatis_MySQL
+                        {
+                            Package = package,
+                            Namespace = ns,
+                            DbColumns = columns,
+                            TableName = tableName,
+                        };
+                    else
+                        t4 = new MyBatis_SQLServer
+                        {
+                            Package = package,
+                            Namespace = ns,
+                            DbColumns = columns,
+                            TableName = tableName,
+                        };
+
                     break;
                 default:
                     t4 = new POCO

@@ -54,8 +54,13 @@
     <Compile Include="AddConnection.Designer.cs">
       <DependentUpon>AddConnection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\MyBatis.cs">
-      <DependentUpon>MyBatis.tt</DependentUpon>
+    <Compile Include="Core\MyBatis_SQLServer.cs">
+      <DependentUpon>MyBatis_SQLServer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\MyBatis_MySQL.cs">
+      <DependentUpon>MyBatis_MySQL.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -103,9 +108,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Core\MyBatis.tt">
+    <None Include="Core\MyBatis_SQLServer.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>MyBatis.cs</LastGenOutput>
+      <LastGenOutput>MyBatis_SQLServer.cs</LastGenOutput>
+    </None>
+    <None Include="Core\MyBatis_MySQL.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MyBatis_MySQL.cs</LastGenOutput>
     </None>
     <None Include="Core\POCO.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -127,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

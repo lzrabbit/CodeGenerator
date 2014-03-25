@@ -24,6 +24,17 @@ namespace CodeGenerator.Core
             get { return this.DbColumns.Where(col => col.IsPrimaryKey == false).ToList(); }
         }
 
+        public List<DbColumn> DbColumnsWithoutIdentityKey
+        {
+            get { return this.DbColumns.Where(col => col.IsIdentity == false).ToList(); }
+        }
+
+        public List<DbColumn> PrimaryKeys
+        {
+            get { return this.DbColumns.Where(col => col.IsPrimaryKey == true).ToList(); }
+        }
+
+
         public T4Base()
         {
             this.Package = this.Namespace = this.GetType().Namespace;

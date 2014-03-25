@@ -7,6 +7,7 @@ namespace CodeGenerator.DB
 {
     public interface IDB
     {
+        EDbType DbType { get; }
 
         bool TestConnection();
 

@@ -17,10 +17,10 @@
 		}#>)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-		(<#for(int i=0;i< this.DbColumns.Count;i++)
+		(<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
 		{
-			if(i==0) this.Write("#{item."+DbColumns[i].ColumnName+"}");
-			else this.Write(",#{item."+DbColumns[i].ColumnName+"}");
+			if(i==0) this.Write("#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
+			else this.Write(",#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
 		}#>)
 		</foreach>
 		ON DUPLICATE KEY UPDATE

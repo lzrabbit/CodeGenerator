@@ -18,9 +18,9 @@ namespace CodeGenerator.Core
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+    #line 1 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class MyBatis : T4Base
+    public partial class MyBatis_MySQL : T4Base
     {
 #line hidden
         /// <summary>
@@ -32,28 +32,28 @@ namespace CodeGenerator.Core
                     "g//DTD Mapper 3.0//EN\"\r\n  \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\r\n<mappe" +
                     "r namespace=\"");
             
-            #line 10 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+            #line 10 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.Package));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 10 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+            #line 10 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
             
             #line default
             #line hidden
             this.Write("Dao\">\t\r\n\t<update id=\"batchUpdate\" parameterType=\"list\">\r\n\t\tINSERT INTO\r\n\t\t");
             
-            #line 13 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+            #line 13 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 13 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+            #line 13 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
 for(int i=0;i< this.DbColumns.Count;i++)
 		{
 		   if(i==0) this.Write(DbColumns[i].ColumnName);
@@ -65,18 +65,18 @@ for(int i=0;i< this.DbColumns.Count;i++)
             this.Write(")\r\n\t\tVALUES\r\n\t\t<foreach collection=\"list\" item=\"item\" index=\"index\" separator=\",\"" +
                     ">\r\n\t\t(");
             
-            #line 20 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
-for(int i=0;i< this.DbColumns.Count;i++)
+            #line 20 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
+for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
 		{
-			if(i==0) this.Write("#{item."+DbColumns[i].ColumnName+"}");
-			else this.Write(",#{item."+DbColumns[i].ColumnName+"}");
+			if(i==0) this.Write("#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
+			else this.Write(",#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
 		}
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t</foreach>\r\n\t\tON DUPLICATE KEY UPDATE\r\n\t\t");
             
-            #line 27 "D:\GitHub\CodeGenerator\CodeGenerator.Core\MyBatis.tt"
+            #line 27 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_MySQL.tt"
 for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
 		{
 			if(i==0) this.Write(DbColumnsWithoutPrimaryKey[i].ColumnName+"=VALUES("+DbColumnsWithoutPrimaryKey[i].ColumnName+")");

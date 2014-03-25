@@ -20,6 +20,11 @@ namespace CodeGenerator.DB
 
         #region IDB 成员
 
+        public EDbType DbType
+        {
+            get { return EDbType.MySql; }
+        }
+
         public bool TestConnection()
         {
             using (MySqlConnection conn = new MySqlConnection(this.ConnString))
@@ -160,6 +165,7 @@ namespace CodeGenerator.DB
                 }
             }
         }
+
 
     }
 }
