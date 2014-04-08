@@ -15,6 +15,7 @@ namespace CodeGenerator
         [STAThread]
         static void Main()
         {
+            string abde = string.Format("{0}=#{{{0}}}","tt");
             try
             {
                 AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;

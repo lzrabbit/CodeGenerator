@@ -7,13 +7,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="<#=this.Package#>.<#=this.TableName#>Dao">	
+<mapper namespace="<#=this.Namespace#>.<#=this.TableName#>Dao">	
 	<update id="batchUpdate" parameterType="list">
 		INSERT INTO
-		<#=this.TableName#>(<#for(int i=0;i< this.DbColumns.Count;i++)
+		<#=this.TableName#>(<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
 		{
-		   if(i==0) this.Write(DbColumns[i].ColumnName);
-		   else  this.Write(","+DbColumns[i].ColumnName);
+		   if(i==0) this.Write(DbColumnsWithoutIdentityKey[i].ColumnName);
+		   else  this.Write(","+DbColumnsWithoutIdentityKey[i].ColumnName);
 		}#>)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">

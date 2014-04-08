@@ -90,7 +90,6 @@ namespace CodeGenerator
                 case "POCO":
                     t4 = new POCO
                     {
-                        Package = package,
                         Namespace = ns,
                         DbColumns = columns,
                         TableName = tableName,
@@ -99,7 +98,6 @@ namespace CodeGenerator
                 case "POJO":
                     t4 = new POJO
                     {
-                        Package = package,
                         Namespace = ns,
                         DbColumns = columns,
                         TableName = tableName,
@@ -109,7 +107,6 @@ namespace CodeGenerator
                     if (DB.DbType == EDbType.MySql)
                         t4 = new MyBatis_MySQL
                         {
-                            Package = package,
                             Namespace = ns,
                             DbColumns = columns,
                             TableName = tableName,
@@ -117,7 +114,6 @@ namespace CodeGenerator
                     else
                         t4 = new MyBatis_SQLServer
                         {
-                            Package = package,
                             Namespace = ns,
                             DbColumns = columns,
                             TableName = tableName,
@@ -127,7 +123,6 @@ namespace CodeGenerator
                 default:
                     t4 = new POCO
                     {
-                        Package = package,
                         Namespace = ns,
                         DbColumns = columns,
                         TableName = tableName,

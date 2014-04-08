@@ -9,11 +9,12 @@ namespace CodeGenerator.Core
 {
     public abstract class T4Base : T4TemplateBase
     {
-        public string Package { get; set; }
 
         public string Namespace { get; set; }
 
         public string TableName { get; set; }
+
+        public string FullClassName { get { return this.Namespace + "." + TableName; } }
 
         public List<DbColumn> DbColumns { get; set; }
 
@@ -37,7 +38,7 @@ namespace CodeGenerator.Core
 
         public T4Base()
         {
-            this.Package = this.Namespace = this.GetType().Namespace;
+            this.Namespace = this.GetType().Namespace;
         }
     }
 

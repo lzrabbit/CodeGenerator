@@ -7,7 +7,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="<#=this.Package#>.<#=this.TableName#>Dao">	
+<mapper namespace="<#=this.FullClassName#>Dao">
+	<update id="update" parameterType="<#=this.FullClassName#>">
+		UPDATE <#=this.TableName#> SET  
+		<#for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
+		{
+			if(i==0) this.Write("{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
+			else this.Write(",{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
+		}#> WHERE <#for(int i=0;i< this.PrimaryKeys.Count;i++)
+						{
+							if(i==0) this.Write("{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
+							else this.Write(",{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
+						}#>
+	</update>
 	<update id="batchUpdate" parameterType="list">
 		MERGE <#=this.TableName#> AS target
 		USING 

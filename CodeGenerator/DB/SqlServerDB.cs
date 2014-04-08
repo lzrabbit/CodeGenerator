@@ -45,8 +45,8 @@ namespace CodeGenerator.DB
                                             ic.column_id,
                                             ic.index_column_id,
                                             ic.object_id
-                                            FROM {0}.sys.indexes idx
-                                            INNER JOIN {0}.sys.index_columns ic ON idx.index_id = ic.index_id AND idx.object_id = ic.object_id
+                                            FROM [{0}].sys.indexes idx
+                                            INNER JOIN [{0}].sys.index_columns ic ON idx.index_id = ic.index_id AND idx.object_id = ic.object_id
                                             WHERE  idx.object_id =OBJECT_ID('{1}') AND idx.is_primary_key=1
                                         )
                                         select
@@ -68,9 +68,9 @@ namespace CodeGenerator.DB
                                         cast(colm.precision as int) Precision,
                                         cast(colm.scale as int) Scale,
                                         prop.value Remark
-                                        from {0}.sys.columns colm
-                                        inner join {0}.sys.types systype on colm.system_type_id=systype.system_type_id and colm.user_type_id=systype.user_type_id
-                                        left join {0}.sys.extended_properties prop on colm.object_id=prop.major_id and colm.column_id=prop.minor_id
+                                        from [{0}].sys.columns colm
+                                        inner join [{0}].sys.types systype on colm.system_type_id=systype.system_type_id and colm.user_type_id=systype.user_type_id
+                                        left join [{0}].sys.extended_properties prop on colm.object_id=prop.major_id and colm.column_id=prop.minor_id
                                         LEFT JOIN indexCTE ON colm.column_id=indexCTE.column_id AND colm.object_id=indexCTE.object_id
                                         where colm.object_id=OBJECT_ID('{1}')
                                         order by colm.column_id", database, table);
@@ -107,21 +107,21 @@ namespace CodeGenerator.DB
                                         ,idx.is_unique_constraint IsUniqueConstraint
                                         ,STUFF(
                                         (
-	                                        SELECT  ','+c.name from {0}.sys.index_columns ic
-	                                        inner join {0}.sys.columns c on ic.column_id=c.column_id and ic.object_id=c.object_id
+	                                        SELECT  ','+c.name from [{0}].sys.index_columns ic
+	                                        inner join [{0}].sys.columns c on ic.column_id=c.column_id and ic.object_id=c.object_id
 	                                        WHERE ic.is_included_column = 0 and ic.index_id=idx.index_id AND ic.object_id=idx.object_id
 	                                        ORDER BY ic.key_ordinal
 	                                        FOR XML PATH('')
                                         ),1,1,'') IndexColumns
                                         ,STUFF(
                                         (
-	                                        SELECT  ','+c.name from {0}.sys.index_columns ic
-	                                        inner join {0}.sys.columns c on ic.column_id=c.column_id and ic.object_id=c.object_id
+	                                        SELECT  ','+c.name from [{0}].sys.index_columns ic
+	                                        inner join [{0}].sys.columns c on ic.column_id=c.column_id and ic.object_id=c.object_id
 	                                        WHERE ic.is_included_column = 1 and ic.index_id=idx.index_id AND ic.object_id=idx.object_id
 	                                        ORDER BY ic.key_ordinal
 	                                        FOR XML PATH('')
                                         ),1,1,'') IncludeColumns
-                                        from {0}.sys.indexes idx
+                                        from [{0}].sys.indexes idx
                                         where object_id =OBJECT_ID('{1}')", database, table);
 
             #endregion SQL
@@ -154,9 +154,9 @@ namespace CodeGenerator.DB
 		                                        ELSE 0
 	                                        END
                                         AS BIT) HasPrimaryKey
-                                        from {0}.sys.objects obj
-                                        inner join {0}.dbo.sysindexes idx on obj.object_id=idx.id and idx.indid<=1
-                                        INNER JOIN {0}.sys.schemas schem ON obj.schema_id=schem.schema_id
+                                        from [{0}].sys.objects obj
+                                        inner join [{0}].dbo.sysindexes idx on obj.object_id=idx.id and idx.indid<=1
+                                        INNER JOIN [{0}].sys.schemas schem ON obj.schema_id=schem.schema_id
                                         where type='U'
                                         order by obj.name", database);
 
