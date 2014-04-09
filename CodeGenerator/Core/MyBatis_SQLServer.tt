@@ -8,56 +8,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="<#=this.FullClassName#>Dao">
+	<insert parameterType="<#=this.FullClassName#>">
+		INSERT INTO <#=this.TableName#>(<#=string.Join(",", this.DbColumns.Select(col=>string.Format("{0}",col.ColumnName)))#>)
+		VALUES(<#=string.Join(",", this.DbColumns.Select(col=>string.Format("#{{{0}}}",col.ColumnName)))#>)
+	</insert>
 	<update id="update" parameterType="<#=this.FullClassName#>">
-		UPDATE <#=this.TableName#> SET  
-		<#for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
-		{
-			if(i==0) this.Write("{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-			else this.Write(",{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-		}#> WHERE <#for(int i=0;i< this.PrimaryKeys.Count;i++)
-						{
-							if(i==0) this.Write("{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
-							else this.Write(",{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
-						}#>
+		UPDATE <#=this.TableName#> SET 
+		<#=string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=#{{{0}}}",col)))#> 
+		WHERE <#=string.Join(",", this.PrimaryKeys.Select(col=>string.Format("{0}=#{{{0}}}",col)))#> 
 	</update>
 	<update id="batchUpdate" parameterType="list">
 		MERGE <#=this.TableName#> AS target
 		USING 
 		(
 		<foreach collection="list" item="item" index="index" separator=" UNION ALL ">
-				SELECT <#for(int i=0;i< this.DbColumns.Count;i++)
-						{
-							if(i==0) this.Write("#{item."+DbColumns[i].ColumnName+"}");
-							else this.Write(",#{item."+DbColumns[i].ColumnName+"}");
-						}#>
-
+			SELECT <#=string.Join(",", this.DbColumns.Select(col=>string.Format("#{{{0}}}",col.ColumnName)))#>
 		</foreach>
-		) AS source (<#for(int i=0;i< this.DbColumns.Count;i++)
-						{
-							if(i==0) this.Write(DbColumns[i].ColumnName);
-							else this.Write(","+DbColumns[i].ColumnName);
-						}#>)
-		ON (<#for(int i=0;i< this.PrimaryKeys.Count;i++)
-						{
-							if(i==0) this.Write("target.{0}=source.{0}",PrimaryKeys[i].ColumnName);
-							else this.Write(",target.{0}=source.{0}",PrimaryKeys[i].ColumnName);
-						}#>)
-		WHEN MATCHED THEN UPDATE SET <#for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
-						{
-							if(i==0) this.Write("{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-							else this.Write(",{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-						}#>
-
-		WHEN NOT MATCHED THEN INSERT
-		(<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-						{
-							if(i==0) this.Write(DbColumnsWithoutIdentityKey[i].ColumnName);
-							else this.Write(","+DbColumnsWithoutIdentityKey[i].ColumnName);
-						}#>)
-		VALUES (<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-						{
-							if(i==0) this.Write("source."+DbColumnsWithoutIdentityKey[i].ColumnName);
-							else this.Write(",source."+DbColumnsWithoutIdentityKey[i].ColumnName);
-						}#>);
+		) AS source (<#=string.Join(",", this.DbColumns.Select(col=>string.Format("{0}",col.ColumnName)))#>)
+		ON (<#=string.Join(",", this.PrimaryKeys.Select(col=>string.Format("target.{0}=source.{0}",col)))#>)
+		WHEN MATCHED THEN UPDATE SET <#=string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=source.{0}",col)))#>
+		WHEN NOT MATCHED THEN INSERT (<#=string.Join(",", this.DbColumnsWithoutIdentityKey)#>) VALUES (<#=string.Join(",", this.DbColumnsWithoutIdentityKey.Select(col=>string.Format("#{{{0}}}",col)))#>);
 	</update>
 </mapper>

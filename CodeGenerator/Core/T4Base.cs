@@ -20,21 +20,20 @@ namespace CodeGenerator.Core
 
         public abstract string TransformText();
 
-        public List<DbColumn> DbColumnsWithoutPrimaryKey
+        public List<string> DbColumnsWithoutPrimaryKey
         {
-            get { return this.DbColumns.Where(col => col.IsPrimaryKey == false).ToList(); }
+            get { return this.DbColumns.Where(col => col.IsPrimaryKey == false && col.IsIdentity == false).Select(col => col.ColumnName).ToList(); }
         }
 
-        public List<DbColumn> DbColumnsWithoutIdentityKey
+        public List<string> DbColumnsWithoutIdentityKey
         {
-            get { return this.DbColumns.Where(col => col.IsIdentity == false).ToList(); }
+            get { return this.DbColumns.Where(col => col.IsIdentity == false).Select(col => col.ColumnName).ToList(); }
         }
 
-        public List<DbColumn> PrimaryKeys
+        public List<string> PrimaryKeys
         {
-            get { return this.DbColumns.Where(col => col.IsPrimaryKey == true).ToList(); }
+            get { return this.DbColumns.Where(col => col.IsPrimaryKey == true).Select(col => col.ColumnName).ToList(); }
         }
-
 
         public T4Base()
         {

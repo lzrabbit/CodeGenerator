@@ -8,27 +8,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="<#=this.Namespace#>.<#=this.TableName#>Dao">	
+	<insert parameterType="<#=this.FullClassName#>">
+		INSERT INTO <#=this.TableName#>(<#=string.Join(",", this.DbColumns.Select(col=>string.Format("{0}",col.ColumnName)))#>)
+		VALUES(<#=string.Join(",", this.DbColumns.Select(col=>string.Format("#{{{0}}}",col.ColumnName)))#>)
+	</insert>
+	<update id="update" parameterType="<#=this.FullClassName#>">
+		UPDATE <#=this.TableName#> SET 
+		<#=string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=#{{{0}}}",col)))#> 
+		WHERE <#=string.Join(",", this.PrimaryKeys.Select(col=>string.Format("{0}=#{{{0}}}",col)))#> 
+	</update>
 	<update id="batchUpdate" parameterType="list">
 		INSERT INTO
-		<#=this.TableName#>(<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-		{
-		   if(i==0) this.Write(DbColumnsWithoutIdentityKey[i].ColumnName);
-		   else  this.Write(","+DbColumnsWithoutIdentityKey[i].ColumnName);
-		}#>)
+		<#=string.Join(",", this.DbColumnsWithoutIdentityKey)#>
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-		(<#for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-		{
-			if(i==0) this.Write("#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
-			else this.Write(",#{item."+DbColumnsWithoutIdentityKey[i].ColumnName+"}");
-		}#>)
+			(<#=string.Join(",", this.DbColumnsWithoutIdentityKey.Select(col=>string.Format("#{{item.{0}}}",col)))#>)
 		</foreach>
 		ON DUPLICATE KEY UPDATE
-		<#for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
-		{
-			if(i==0) this.Write(DbColumnsWithoutPrimaryKey[i].ColumnName+"=VALUES("+DbColumnsWithoutPrimaryKey[i].ColumnName+")");
-			else this.Write(","+DbColumnsWithoutPrimaryKey[i].ColumnName+"=VALUES("+DbColumnsWithoutPrimaryKey[i].ColumnName+")");
-		}#>
-
+		<#=string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=VALUES({0})",col)))#>
 	</update>
 </mapper>

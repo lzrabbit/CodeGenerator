@@ -80,7 +80,6 @@ namespace CodeGenerator
 
             var columns = DB.GetDbColumns(Node.Parent.Tag.ToString(), ((DbTable)Node.Tag).TableName);
             var tableName = ((DbTable)Node.Tag).TableName;
-            var package = "com.cnblogs.lzrabbit";
             var ns = "com.cnblogs.lzrabbit";
             T4Base t4;
 

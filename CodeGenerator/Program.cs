@@ -15,14 +15,9 @@ namespace CodeGenerator
         [STAThread]
         static void Main()
         {
-            string abde = string.Format("{0}=#{{{0}}}","tt");
             try
             {
                 AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-
-
-
-
 
                 //处理未捕获的异常   
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);

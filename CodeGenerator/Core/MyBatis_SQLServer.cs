@@ -30,113 +30,109 @@ namespace CodeGenerator.Core
             
             #line default
             #line hidden
-            this.Write("Dao\">\r\n\t<update id=\"update\" parameterType=\"");
+            this.Write("Dao\">\r\n\t<insert parameterType=\"");
             
             #line 11 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.FullClassName));
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\tUPDATE ");
+            this.Write("\">\r\n\t\tINSERT INTO ");
             
             #line 12 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
             
             #line default
             #line hidden
-            this.Write(" SET  \r\n\t\t");
+            this.Write("(");
+            
+            #line 12 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumns.Select(col=>string.Format("{0}",col.ColumnName)))));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n\t\tVALUES(");
             
             #line 13 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
-		{
-			if(i==0) this.Write("{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-			else this.Write(",{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-		}
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumns.Select(col=>string.Format("#{{{0}}}",col.ColumnName)))));
             
             #line default
             #line hidden
-            this.Write(" WHERE ");
+            this.Write(")\r\n\t</insert>\r\n\t<update id=\"update\" parameterType=\"");
+            
+            #line 15 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.FullClassName));
+            
+            #line default
+            #line hidden
+            this.Write("\">\r\n\t\tUPDATE ");
+            
+            #line 16 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
+            
+            #line default
+            #line hidden
+            this.Write(" SET \r\n\t\t");
             
             #line 17 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.PrimaryKeys.Count;i++)
-						{
-							if(i==0) this.Write("{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
-							else this.Write(",{0}=#{{{0}}}",PrimaryKeys[i].ColumnName);
-						}
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=#{{{0}}}",col)))));
             
             #line default
             #line hidden
-            this.Write("\t</update>\r\n\t<update id=\"batchUpdate\" parameterType=\"list\">\r\n\t\tMERGE ");
+            this.Write(" \r\n\t\tWHERE ");
             
-            #line 24 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            #line 18 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.PrimaryKeys.Select(col=>string.Format("{0}=#{{{0}}}",col)))));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\t</update>\r\n\t<update id=\"batchUpdate\" parameterType=\"list\">\r\n\t\tMERGE ");
+            
+            #line 21 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TableName));
             
             #line default
             #line hidden
             this.Write(" AS target\r\n\t\tUSING \r\n\t\t(\r\n\t\t<foreach collection=\"list\" item=\"item\" index=\"index\"" +
-                    " separator=\" UNION ALL \">\r\n\t\t\t\tSELECT ");
+                    " separator=\" UNION ALL \">\r\n\t\t\tSELECT ");
             
-            #line 28 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumns.Count;i++)
-						{
-							if(i==0) this.Write("#{item."+DbColumns[i].ColumnName+"}");
-							else this.Write(",#{item."+DbColumns[i].ColumnName+"}");
-						}
+            #line 25 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumns.Select(col=>string.Format("#{{{0}}}",col.ColumnName)))));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t</foreach>\r\n\t\t) AS source (");
             
-            #line 35 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumns.Count;i++)
-						{
-							if(i==0) this.Write(DbColumns[i].ColumnName);
-							else this.Write(","+DbColumns[i].ColumnName);
-						}
+            #line 27 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumns.Select(col=>string.Format("{0}",col.ColumnName)))));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\tON (");
             
-            #line 40 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.PrimaryKeys.Count;i++)
-						{
-							if(i==0) this.Write("target.{0}=source.{0}",PrimaryKeys[i].ColumnName);
-							else this.Write(",target.{0}=source.{0}",PrimaryKeys[i].ColumnName);
-						}
+            #line 28 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.PrimaryKeys.Select(col=>string.Format("target.{0}=source.{0}",col)))));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\tWHEN MATCHED THEN UPDATE SET ");
             
-            #line 45 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumnsWithoutPrimaryKey.Count;i++)
-						{
-							if(i==0) this.Write("{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-							else this.Write(",{0}=source.{0}", DbColumnsWithoutPrimaryKey[i].ColumnName);
-						}
+            #line 29 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumnsWithoutPrimaryKey.Select(col=>string.Format("{0}=source.{0}",col)))));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\tWHEN NOT MATCHED THEN INSERT\r\n\t\t(");
+            this.Write("\r\n\t\tWHEN NOT MATCHED THEN INSERT (");
             
-            #line 52 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-						{
-							if(i==0) this.Write(DbColumnsWithoutIdentityKey[i].ColumnName);
-							else this.Write(","+DbColumnsWithoutIdentityKey[i].ColumnName);
-						}
+            #line 30 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumnsWithoutIdentityKey)));
             
             #line default
             #line hidden
-            this.Write(")\r\n\t\tVALUES (");
+            this.Write(") VALUES (");
             
-            #line 57 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
-for(int i=0;i< this.DbColumnsWithoutIdentityKey.Count;i++)
-						{
-							if(i==0) this.Write("source."+DbColumnsWithoutIdentityKey[i].ColumnName);
-							else this.Write(",source."+DbColumnsWithoutIdentityKey[i].ColumnName);
-						}
+            #line 30 "D:\GitHub\CodeGenerator\CodeGenerator\Core\MyBatis_SQLServer.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",", this.DbColumnsWithoutIdentityKey.Select(col=>string.Format("#{{{0}}}",col)))));
             
             #line default
             #line hidden
