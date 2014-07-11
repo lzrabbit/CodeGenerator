@@ -37,6 +37,8 @@
             this.pOCOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pOJOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.myBatisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtNamespace = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,11 +122,29 @@
             this.myBatisToolStripMenuItem.Text = "MyBatis";
             this.myBatisToolStripMenuItem.Click += new System.EventHandler(this.CodeMenuItem_Click);
             // 
+            // txtNamespace
+            // 
+            this.txtNamespace.Location = new System.Drawing.Point(290, 48);
+            this.txtNamespace.Name = "txtNamespace";
+            this.txtNamespace.Size = new System.Drawing.Size(425, 21);
+            this.txtNamespace.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(223, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "命名空间:";
+            // 
             // SimpleCoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1071, 461);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtNamespace);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.treeView);
@@ -151,6 +171,8 @@
         private System.Windows.Forms.ToolStripMenuItem pOCOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pOJOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem myBatisToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtNamespace;
+        private System.Windows.Forms.Label label1;
     }
 }
 

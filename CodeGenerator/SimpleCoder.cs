@@ -80,7 +80,8 @@ namespace CodeGenerator
 
             var columns = DB.GetDbColumns(Node.Parent.Tag.ToString(), ((DbTable)Node.Tag).TableName);
             var tableName = ((DbTable)Node.Tag).TableName;
-            var ns = "com.cnblogs.lzrabbit";
+            var ns = string.IsNullOrWhiteSpace(this.txtNamespace.Text) ? "com.cnblogs.lzrabbit" : this.txtNamespace.Text.Trim();
+
             T4Base t4;
 
             string str = this.menuCode.DropDownItems.Cast<ToolStripMenuItem>().Single(item => item.Checked).Text;

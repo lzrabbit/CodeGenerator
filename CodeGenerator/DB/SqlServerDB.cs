@@ -238,23 +238,34 @@ namespace CodeGenerator.DB
                 }
             }
 
+
+
             public static string JavaType(string dbtype)
             {
+                //Long long
+                //Boolean boolean
+                //Integer int
+                //Double double
+                //Float float;
+                //Character char
+                //Short short
+                //BigDecimal BigDecimal
+                //Byte byte
                 if (string.IsNullOrEmpty(dbtype)) return dbtype;
                 dbtype = dbtype.ToLower();
                 switch (dbtype)
                 {
-                    case "bit": return "boolean";
-                    case "tinyint": return "byte";
-                    case "smallint": return "short";
-                    case "real": return "int";
-                    case "int": return "int";
-                    case "bigint": return "long";
-                    case "float": return "double";
-                    case "decimal": return "decimal";
-                    case "smallmoney": return "decimal";
-                    case "money": return "decimal";
-                    case "numeric": return "decimal";
+                    case "bit": return "Boolean";
+                    case "tinyint": return "Byte";
+                    case "smallint": return "Short";
+                    case "real": return "Integer";
+                    case "int": return "Integer";
+                    case "bigint": return "Long";
+                    case "float": return "Float";
+                    case "decimal": return "BigDecimal";
+                    case "smallmoney": return "BigDecimal";
+                    case "money": return "BigDecimal";
+                    case "numeric": return "BigDecimal";
 
                     case "char": return "Sstring";
                     case "nchar": return "String";

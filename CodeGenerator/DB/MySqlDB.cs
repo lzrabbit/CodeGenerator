@@ -134,14 +134,14 @@ namespace CodeGenerator.DB
                 dbtype = dbtype.ToUpper();
                 switch (dbtype)
                 {
-                    case "TINYINT": return "int";
-                    case "SMALLINT": return "int";
-                    case "MEDIUMINT": return "int";
-                    case "INT": return "int";
-                    case "BIGINT": return "long";
-                    case "FLOAT": return "float";
-                    case "DOUBLE": return "double";
-                    case "DECIMAL ": return "decimal";
+                    case "TINYINT": return "Integer";
+                    case "SMALLINT": return "Integer";
+                    case "MEDIUMINT": return "Integer";
+                    case "INT": return "Integer";
+                    case "BIGINT": return "Long";
+                    case "FLOAT": return "Float";
+                    case "DOUBLE": return "Double";
+                    case "DECIMAL ": return "BigDecimal";
 
                     case "CHAR": return "String";
                     case "VARCHAR": return "String";
